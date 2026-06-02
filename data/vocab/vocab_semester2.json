@@ -1,0 +1,650 @@
+{
+  "semester": 2,
+  "total": 92,
+  "words": [
+    {
+      "word": "flame",
+      "phonetic": "/fleɪm/ n. 火焰                        p.16    shock",
+      "pos": "",
+      "translation": "/ʃɒk/ n. 震惊；令人震惊的事",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "onto",
+      "phonetic": "/'ɒntuː; 'ɒntə/ prep. 向；朝            p.16    bleed",
+      "pos": "",
+      "translation": "/bliːd/ v. (bled /bled/, bled)",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "throw",
+      "phonetic": "/θrəʊ/ v. (threw",
+      "pos": "",
+      "translation": "/θruː/, thrown                流血；出血",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "quick",
+      "phonetic": "/kwɪk/ adj. 快的；迅速的              p.16    tight",
+      "pos": "",
+      "translation": "/taɪt/ adj. 疼痛的；憋气的；",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "be",
+      "phonetic": "about to 即将；正要（做某事）              p.16    peanut /'piːnʌt/",
+      "pos": "n.",
+      "translation": "花生",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "stop",
+      "phonetic": "short 突然停住                          p.16    nervously /'nɜːvəsli/",
+      "pos": "adv.",
+      "translation": "紧张不安地",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "aid",
+      "phonetic": "/eɪd/ n. & v. 帮助；援助                 p.16    allergic",
+      "pos": "",
+      "translation": "/ə'lɜːdʒɪk/ adj. 过敏的",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "extinguisher",
+      "phonetic": "/ɪk'stɪŋgwɪʃə(r)/ n. 灭火器     p.16    Ben",
+      "pos": "",
+      "translation": "/ben/ 本",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "eat",
+      "phonetic": "out 上馆子吃饭；在外用餐                  p.17    Nancy /'nænsi/",
+      "pos": "",
+      "translation": "南希",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "tonight",
+      "phonetic": "/tə'naɪt/ adv. 在今晚                       Jeff",
+      "pos": "",
+      "translation": "/dʒef/ 杰夫",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "sadly",
+      "phonetic": "/'sædli/ adv. 伤心地；令人遗憾         p.17    Allen",
+      "pos": "",
+      "translation": "/'ælən/ 艾伦",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "smoke",
+      "phonetic": "/sməʊk/ n. 烟 v. 吸烟；冒烟           p.17    Kelly",
+      "pos": "",
+      "translation": "/'keli/ 凯莉",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "unfortunately",
+      "phonetic": "/ʌn'fɔːtʃənətli/                      Cooper",
+      "pos": "",
+      "translation": "/'kuːpə(r)/ 库珀",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "luckily",
+      "phonetic": "/'lʌkɪli/ adv. 幸运地                p.17    Unit",
+      "pos": "",
+      "translation": "3",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "badly",
+      "phonetic": "/'bædli/ adv. (worse",
+      "pos": "",
+      "translation": "/wɜːs/,            deal with 处理；对付",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "worst",
+      "phonetic": "/wɜːst/) 严重地            p.17    emotion",
+      "pos": "",
+      "translation": "/ɪ'məʊʃn/ n. 情感；情绪",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "harm",
+      "phonetic": "/hɑːm/ n. & v. 伤害；损害               p.17    upset",
+      "pos": "",
+      "translation": "/ʌp'set/ adj. 难过的；沮丧的",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "pill",
+      "phonetic": "/pɪl/ n. 药丸；药片                     p.18    lonely",
+      "pos": "",
+      "translation": "/'ləʊnli/ adj. 孤独的；寂寞的",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "painful",
+      "phonetic": "/'peɪnfl/ adj. (身体部位)            shocked",
+      "pos": "",
+      "translation": "/ʃɒkt/ adj. 震惊的",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "lie",
+      "phonetic": "/laɪ/ v. (lay",
+      "pos": "",
+      "translation": "/leɪ/, lain /leɪn/)        control /kən'trəʊl/ v. & n. 控制",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "harmful",
+      "phonetic": "/'hɑːmfl/ adj. 有害的                p.18    hurtful",
+      "pos": "",
+      "translation": "/'hɜːtfl/ adj. 伤感情的",
+      "unit": "Unit 3"
+    },
+    {
+      "word": "wonder",
+      "phonetic": "/'wʌndə(r)/ n.",
+      "pos": "",
+      "translation": "奇观；惊叹",
+      "unit": "Unit 4"
+    },
+    {
+      "word": "below",
+      "phonetic": "/bɪ'ləʊ/ prep.",
+      "pos": "",
+      "translation": "在（或到）……",
+      "unit": "Unit 4"
+    },
+    {
+      "word": "above",
+      "phonetic": "/ə'bʌv/ prep.",
+      "pos": "",
+      "translation": "在（或向）……",
+      "unit": "Unit 4"
+    },
+    {
+      "word": "Lake",
+      "phonetic": "Baikal /ˈbaɪkæl/",
+      "pos": "",
+      "translation": "贝加尔湖",
+      "unit": "Unit 5"
+    },
+    {
+      "word": "Great",
+      "phonetic": "Barrier /ˈbæriə(r)/",
+      "pos": "",
+      "translation": "Reef 大堡礁",
+      "unit": "Unit 5"
+    },
+    {
+      "word": "flood",
+      "phonetic": "/flʌd/ n.",
+      "pos": "",
+      "translation": "水灾；洪水",
+      "unit": "Unit 5"
+    },
+    {
+      "word": "wave",
+      "phonetic": "/weɪv/ n.",
+      "pos": "",
+      "translation": "波浪；波；挥手",
+      "unit": "Unit 5"
+    },
+    {
+      "word": "interview",
+      "phonetic": "/ˈɪntəvjuː/ n.",
+      "pos": "",
+      "translation": "采访；面试",
+      "unit": "Unit 5"
+    },
+    {
+      "word": "trouble",
+      "phonetic": "/ˈtrʌbl/ n.",
+      "pos": "",
+      "translation": "苦恼；困难",
+      "unit": "Unit 5"
+    },
+    {
+      "word": "supply",
+      "phonetic": "/səˈplaɪ/ n.",
+      "pos": "",
+      "translation": "供应（量）；",
+      "unit": "Unit 5"
+    },
+    {
+      "word": "beat",
+      "phonetic": "/biːt/ v. (beat, beaten",
+      "pos": "",
+      "translation": "/ˈbiːtn/) 敲；打",
+      "unit": "Unit 5"
+    },
+    {
+      "word": "hide",
+      "phonetic": "/haɪd/ v. (hid",
+      "pos": "",
+      "translation": "/hɪd/, hidden /ˈhɪdn/) 躲藏；隐蔽",
+      "unit": "Unit 5"
+    },
+    {
+      "word": "nearby",
+      "phonetic": "/ˌnɪəˈbaɪ/ adj.",
+      "pos": "",
+      "translation": "附近的",
+      "unit": "Unit 5"
+    },
+    {
+      "word": "hero",
+      "phonetic": "/ˈhɪərəʊ/ n. (pl. heroes)",
+      "pos": "",
+      "translation": "英雄；",
+      "unit": "Unit 5"
+    },
+    {
+      "word": "landslide",
+      "phonetic": "/ˈlændslaɪd/ n. (山坡或悬崖的)                                    unlucky",
+      "pos": "",
+      "translation": "/ʌnˈlʌki/ adj. 不幸的；",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "safeguard",
+      "phonetic": "/ˈseɪfɡɑːd/ v. 保护；捍卫                                    rainy",
+      "pos": "",
+      "translation": "/ˈreɪni/ adj. 阴雨的；多雨的",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "manpower",
+      "phonetic": "/ˈmænpaʊə(r)/                                    Tilly",
+      "pos": "",
+      "translation": "/ˈtɪli/ 蒂莉",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "heartbeat",
+      "phonetic": "/ˈhɑːtbiːt/ n. 心跳（声）         p.48      Indonesia",
+      "pos": "",
+      "translation": "/ˌɪndəˈniːʒə/ 印度尼西亚",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "rescue",
+      "phonetic": "/ˈreskjuː/ n. 救援  v. 援救；营救    p.48      Japan",
+      "pos": "",
+      "translation": "/dʒəˈpæn/ 日本",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "southwestern",
+      "phonetic": "/ˌsaʊθˈwestən/                            bow",
+      "pos": "",
+      "translation": "/baʊ/ v. & n. 鞠躬",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "volunteer",
+      "phonetic": "/ˌvɒlənˈtɪə(r)/ n. 志愿者；                    fist",
+      "pos": "",
+      "translation": "/fɪst/ n. 拳头",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "terribly",
+      "phonetic": "/ˈterəbli/ adv. 非常糟地；非常      p.49      kiss",
+      "pos": "",
+      "translation": "/kɪs/ v. 亲吻  n. 吻",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "alarm",
+      "phonetic": "/əˈlɑːm/ n. 警报（器）；惊恐          p.49      cheek",
+      "pos": "",
+      "translation": "/tʃiːk/ n. 脸颊",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "wake",
+      "phonetic": "up 醒来                                  p.49      embarrassed /ɪmˈbærəst/",
+      "pos": "adj.",
+      "translation": "尴尬的",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "go",
+      "phonetic": "off（警报器等）突然发出巨响              p.49      confused /kənˈfjuːzd/",
+      "pos": "adj.",
+      "translation": "困惑的",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "review",
+      "phonetic": "/rɪˈvjuː/ v. 复习；回顾；复查                    formal",
+      "pos": "",
+      "translation": "/ˈfɔːml/ adj. 正式的",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "sudden",
+      "phonetic": "/ˈsʌdn/ adj. 突然的；骤然            p.49      rude",
+      "pos": "",
+      "translation": "/ruːd/ adj. 粗鲁的",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "all",
+      "phonetic": "of a sudden 突然；猛地                   p.49      uncommon /ʌnˈkɒmən/",
+      "pos": "adj.",
+      "translation": "罕见的；",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "out",
+      "phonetic": "of breath 上气不接下气                    p.49      fork /fɔːk/",
+      "pos": "n.",
+      "translation": "叉子",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "rainstorm",
+      "phonetic": "/ˈreɪnstɔːm/ n. 暴风雨            p.49      Indian",
+      "pos": "",
+      "translation": "/ˈɪndiən/ adj. 印度的；印度人的",
+      "unit": "Unit 6"
+    },
+    {
+      "word": "defeat",
+      "phonetic": "/dɪˈfiːt/ v.",
+      "pos": "",
+      "translation": "击败；战胜",
+      "unit": "Unit 8"
+    },
+    {
+      "word": "American",
+      "phonetic": "/əˈmerɪkən/ adj.",
+      "pos": "",
+      "translation": "美国的；",
+      "unit": "Unit 8"
+    },
+    {
+      "word": "the",
+      "phonetic": "elderly 老人；上了年纪的人         p.72    life-saving /ˈlaɪf seɪvɪŋ/",
+      "pos": "adj.",
+      "translation": "救命的；",
+      "unit": "Unit 8"
+    },
+    {
+      "word": "cage",
+      "phonetic": "/keɪdʒ/ n. 笼子                        p.73    **voluntary**",
+      "pos": "",
+      "translation": "/ˈvɒləntri/ adj. 自愿的；",
+      "unit": "Unit 8"
+    },
+    {
+      "word": "shelter",
+      "phonetic": "/ˈʃeltə(r)/ n. 庇护所；居所     p.73    **worth**",
+      "pos": "",
+      "translation": "/wɜːθ/ adj. 值得；有价值",
+      "unit": "Unit 8"
+    },
+    {
+      "word": "ever",
+      "phonetic": "since 自从；自……以后         p.76                                    ˌædvərˈtaɪzmənt/（＝ad",
+      "pos": "",
+      "translation": "/æd/）",
+      "unit": "Unit 8"
+    },
+    {
+      "word": "bump",
+      "phonetic": "/bʌmp/ *v.*",
+      "pos": "",
+      "translation": "碰；撞",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "cultural",
+      "phonetic": "/'kʌltʃərəl/ adj.",
+      "pos": "",
+      "translation": "与文化有关的；文化的",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "deal",
+      "phonetic": "/diːl/ n.",
+      "pos": "",
+      "translation": "交易；协议",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "defeat",
+      "phonetic": "/dɪ'fiːt/ v.",
+      "pos": "",
+      "translation": "击败；战胜",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "extinguisher",
+      "phonetic": "/ɪkˈstɪŋɡwɪʃə(r)/ n. 灭火器 p.16　　froth",
+      "pos": "",
+      "translation": "/frɒθ/ n. 泡；泡沫",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "familiar",
+      "phonetic": "with 通晓；熟悉　　　　　p.79　　gentle /ˈdʒentl/",
+      "pos": "adj.",
+      "translation": "温柔的",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "fantasy",
+      "phonetic": "/ˈfæntəsi/ n. 幻想；幻想作品 p.62　　**gentleman**",
+      "pos": "",
+      "translation": "/ˈdʒentlmən/",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "fault",
+      "phonetic": "/fɔːlt/ n. 过错；责任　　　　　p.23　　　　　n. (pl. gentlemen",
+      "pos": "",
+      "translation": "/ˈdʒentlmən/)",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "firefighter",
+      "phonetic": "/ˈfaɪəfaɪtə(r)/ n. 消防队员 p.48　　get over",
+      "pos": "",
+      "translation": "克服（困难）；解决（问题）",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "floodwater",
+      "phonetic": "/ˈflʌdwɔːtə(r)/ n. 洪水　p.48　　**guard**",
+      "pos": "",
+      "translation": "/ɡɑːd/ n. 卫兵；保卫 v. 保卫",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "forgive",
+      "phonetic": "/fəˈɡɪv/ v. (forgave",
+      "pos": "",
+      "translation": "/fəˈɡeɪv/,　　**harm** /hɑːm/ n. & v. 伤害；损害",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "forgiven",
+      "phonetic": "/fəˈɡɪvn/) 原谅；宽恕 p.23　　**harmful**",
+      "pos": "",
+      "translation": "/ˈhɑːmfl/ adj. 有害的",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "heartbeat",
+      "phonetic": "/ˈhɑːtbiːt/ n.",
+      "pos": "",
+      "translation": "心跳（声）",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "hide",
+      "phonetic": "/haɪd/ v. (hid",
+      "pos": "",
+      "translation": "/hɪd/, hidden /ˈhɪdn/) 躲藏；隐藏",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "knife",
+      "phonetic": "/naɪf/ n. (pl. knives",
+      "pos": "",
+      "translation": "/naɪvz/) 刀",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "kung",
+      "phonetic": "fu /ˌkʌŋ ˈfuː/",
+      "pos": "n.",
+      "translation": "功夫",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "nobody",
+      "phonetic": "/ˈnəʊbədi/ pron.",
+      "pos": "",
+      "translation": "没有人；",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "painful",
+      "phonetic": "/ˈpeɪnfl/ adj.",
+      "pos": "",
+      "translation": "(身体部位)",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "power",
+      "phonetic": "/ˈpaʊə(r)/ n.",
+      "pos": "",
+      "translation": "电力供应；能量；",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "practical",
+      "phonetic": "/ˈpræktɪkl/ adj.",
+      "pos": "",
+      "translation": "实用的；",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "primary",
+      "phonetic": "/ˈpraɪməri/ adj.",
+      "pos": "",
+      "translation": "小学教育的；",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "program",
+      "phonetic": "/ˈprəʊɡræm/ v.",
+      "pos": "",
+      "translation": "编写程序",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "security",
+      "phonetic": "/sɪˈkjʊərəti/ n.",
+      "pos": "",
+      "translation": "安全；保安；保障",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "snorkel",
+      "phonetic": "/ˈsnɔːkl/ v.",
+      "pos": "",
+      "translation": "使用呼吸管潜泳",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "spoiled",
+      "phonetic": "/spɔɪld/ adj. (= spoilt",
+      "pos": "",
+      "translation": "/spɔɪlt/) 宠坏的；娇惯坏的",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "successful",
+      "phonetic": "/səkˈsesfl/ adj. 成功的；有成就的",
+      "pos": "",
+      "translation": "[p.]",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "supply",
+      "phonetic": "/səˈplaɪ/ n. 供应（量）；(pl. supplies)",
+      "pos": "",
+      "translation": "补给（品）",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "throw",
+      "phonetic": "/θrəʊ/ v. (threw",
+      "pos": "",
+      "translation": "/θruː/, thrown /θrəʊn/) 猛动身体（部位）；扔；抛",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "thunder",
+      "phonetic": "/ˈθʌndə(r)/ n.",
+      "pos": "",
+      "translation": "雷；雷声",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "tonight",
+      "phonetic": "/təˈnaɪt/ adv.",
+      "pos": "",
+      "translation": "在今晚",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "trouble",
+      "phonetic": "/ˈtrʌbl/ n.",
+      "pos": "",
+      "translation": "苦恼；困难",
+      "unit": "Unit 125"
+    },
+    {
+      "word": "hurt",
+      "phonetic": "/hɜːt/ v. (hurt, hurt)",
+      "pos": "",
+      "translation": "(使)疼痛",
+      "unit": "Unit 1"
+    },
+    {
+      "word": "photograph",
+      "phonetic": "/ˈfəʊtəgrɑːf/ v.",
+      "pos": "",
+      "translation": "拍照；照相",
+      "unit": "Unit 1"
+    },
+    {
+      "word": "foot",
+      "phonetic": "/fʊt/ n. (pl. feet",
+      "pos": "",
+      "translation": "/fiːt/) 脚",
+      "unit": "Unit 1"
+    },
+    {
+      "word": "kid",
+      "phonetic": "/kɪd/ n.",
+      "pos": "",
+      "translation": "小孩；儿童",
+      "unit": "Unit 1"
+    }
+  ]
+}

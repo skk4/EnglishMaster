@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EnglishMaster · 进度 - HTML 原型</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <header class="bg-white border-b border-gray-200 px-6 py-3 flex items-center gap-3">
+    <a href="#" class="rounded-lg p-2 hover:bg-gray-100">←</a>
+    <h1 class="font-semibold text-gray-900">学习进度</h1>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-8">
+    <section class="grid grid-cols-3 gap-4 mb-8">
+      <div class="bg-white rounded-xl p-5 border border-gray-200">
+        <div class="flex items-center gap-2 text-gray-500 text-sm mb-2">
+          <span>📊</span><span>总题数</span>
+        </div>
+        <div class="text-3xl font-bold text-gray-900">42</div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-gray-200">
+        <div class="flex items-center gap-2 text-gray-500 text-sm mb-2">
+          <span>✓</span><span>正确率</span>
+        </div>
+        <div class="text-3xl font-bold text-green-600">78%</div>
+      </div>
+      <div class="bg-white rounded-xl p-5 border border-gray-200">
+        <div class="flex items-center gap-2 text-gray-500 text-sm mb-2">
+          <span>🎯</span><span>平均分</span>
+        </div>
+        <div class="text-3xl font-bold text-blue-600">82</div>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">薄弱单元（需加强）</h2>
+      <div class="space-y-2">
+        <div class="bg-white rounded-lg p-4 border border-gray-200 flex items-center gap-4">
+          <div class="flex-1">
+            <div class="font-medium text-gray-900">s2 Unit 3</div>
+            <div class="text-xs text-gray-500 mt-0.5">2 / 8 正确</div>
+          </div>
+          <div class="w-32 bg-gray-200 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-600 h-full" style="width: 25%"></div>
+          </div>
+          <div class="text-sm text-gray-700 w-12 text-right">25%</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">最近记录</h2>
+      <div class="bg-white rounded-lg border border-gray-200 divide-y divide-gray-100">
+        <div class="px-4 py-3 flex items-center gap-3">
+          <div class="w-2 h-2 rounded-full bg-green-500"></div>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-gray-900 truncate">I ___ to school yesterday. （填空）</div>
+            <div class="text-xs text-gray-500 mt-0.5">学期 1 · Unit 1 · fill_blank</div>
+          </div>
+          <div class="text-sm font-medium text-green-600">100</div>
+        </div>
+        <div class="px-4 py-3 flex items-center gap-3">
+          <div class="w-2 h-2 rounded-full bg-red-500"></div>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-gray-900 truncate">What is the past tense of go? （单选）</div>
+            <div class="text-xs text-gray-500 mt-0.5">学期 1 · Unit 1 · multiple_choice</div>
+          </div>
+          <div class="text-sm font-medium text-red-600">0</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

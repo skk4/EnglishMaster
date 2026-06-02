@@ -1,0 +1,10 @@
+{"query":"什么是过去进行时？","language":"zh","expected_unit":"Unit 5","expected_section":"Grammar Focus","difficulty":"medium"}
+{"query":"Past continuous tense example","language":"en","expected_unit":"Unit 5","expected_section":"Grammar Focus","difficulty":"medium"}
+{"query":"Unit 1 词汇有哪些","language":"zh","expected_unit":"Unit 1","expected_section":"Vocabulary","difficulty":"easy"}
+{"query":"ice skating","language":"en","expected_unit":"Unit 1","expected_section":"Section A","difficulty":"medium"}
+{"query":"怎么用比较级？","language":"zh","expected_unit":"Unit 3","expected_section":"Grammar Focus","difficulty":"medium"}
+{"query":"how to use comparative adjectives","language":"en","expected_unit":"Unit 3","expected_section":"Grammar Focus","difficulty":"medium"}
+{"query":"Unit 8 重点句型","language":"zh","expected_unit":"Unit 8","expected_section":"Grammar Focus","difficulty":"hard"}
+{"query":"typhoon story","language":"en","expected_unit":"Unit 5","expected_section":"Section A","difficulty":"medium"}
+{"query":"七年级和八年级的语法区别","language":"zh","expected_unit":"Unit 1","expected_section":"General","difficulty":"hard","note":"泛查询，应返回多个单元"}
+{"query":"do you want to watch a game show","language":"en","expected_unit":"Unit 5","expected_section":"Section B","difficulty":"easy"}

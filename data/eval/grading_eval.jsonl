@@ -1,0 +1,5 @@
+{"id":"gr-q1","type":"multiple_choice","question":"What ___ you do yesterday?","answer":"did","variants":["did"],"score_expected":1.0}
+{"id":"gr-q2","type":"multiple_choice","question":"She ___ a book now.","answer":"is reading","variants":["is reading","'s reading"],"score_expected":1.0}
+{"id":"gr-q3","type":"fill_blank","question":"I ___ (go) to school yesterday.","answer":"went","variants":["went","have gone"],"score_breakdown":{"went":1.0,"have gone":0.6}}
+{"id":"gr-q4","type":"fill_blank","question":"They ___ (play) football now.","answer":"are playing","variants":["are playing","'re playing"],"score_breakdown":{"are playing":1.0,"'re playing":0.9,"playing":0.5}}
+{"id":"gr-q5","type":"translation","question":"我喜欢英语","answer":"I like English.","variants":["I like English.","I enjoy English.","I love English."],"score_breakdown":{"I like English.":1.0,"I enjoy English.":0.9,"I love English.":0.8,"I am like English.":0.3}}

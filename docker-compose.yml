@@ -1,0 +1,72 @@
+# 一键本地启动（开发 + 轻量生产测试用）
+# 生产环境用 Railway / Vercel 单独部署
+
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: englishmaster-backend
+    ports:
+      - "8000:8000"
+    environment:
+      # .env 中读取
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+      - PINECONE_HOST=${PINECONE_HOST}
+      - PINECONE_INDEX_NAME=${PINECONE_INDEX_NAME}
+      - MINIMAX_API_KEY=${MINIMAX_API_KEY}
+      - MINIMAX_MODEL=${MINIMAX_MODEL:-MiniMax-M3}
+      - JWT_SECRET=${JWT_SECRET}
+      - DATABASE_URL=sqlite+aiosqlite:////app/database/app.db
+      - APP_ENV=${APP_ENV:-development}
+    volumes:
+      - backend-db:/app/database
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import httpx; httpx.get('http://localhost:8000/api/health', timeout=3).raise_for_status()"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE: http://localhost:8000
+    container_name: englishmaster-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # 备份：cron 跑 SQLite 备份到本地目录
+  backup:
+    image: amazon/aws-cli:latest
+    container_name: englishmaster-backup
+    volumes:
+      - backend-db:/source:ro
+      - ./backups:/dest
+    entrypoint: /bin/sh
+    command: -c "
+      apk add --no-cache sqlite
+      while true; do
+        echo '[backup] Starting SQLite backup at ' \$$(date)
+        sqlite3 /source/app.db \".backup /dest/app-\$$(date +%Y%m%d-%H%M%S).db\"
+        echo '[backup] Done. Files:'
+        ls -lh /dest/
+        # 保留最近 7 天
+        find /dest -name 'app-*.db' -mtime +7 -delete
+        sleep 86400
+      done
+      "
+
+volumes:
+  backend-db:
+    driver: local

@@ -1,0 +1,40 @@
+# Docker 构建忽略
+.git
+.github
+.vscode
+.idea
+.DS_Store
+*.log
+*.md.bak
+*.swp
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+.coverage
+htmlcov
+.venv
+venv
+*.egg-info
+
+# Node
+node_modules
+.next
+out
+dist
+coverage
+*.tsbuildinfo
+
+# 数据（开发期很大，生产期挂 volume）
+data/images
+data/ocr_cache
+data/processed
+data/vocab
+*.pdf
+
+# Secrets
+.env
+.env.local
+.env.*.local

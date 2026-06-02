@@ -1,0 +1,12 @@
+# GitHub Sponsors / Funding configuration
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+
+# 当前未启用赞助按钮
+# 解开注释并配置后可让用户赞助项目
+#
+# github: [your-github-username]
+# patreon: # Replace with a single Patreon username
+# open_collective: englishmaster
+# ko_fi: # Replace with a single Ko-fi username
+# tidelift: # Replace with a single Tidelift platform-name/package-name
+# custom: ["https://your-donation-link.com"]

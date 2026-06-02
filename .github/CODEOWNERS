@@ -1,0 +1,38 @@
+# CODEOWNERS
+# 哪些人/团队 review 哪些路径
+# 详细语法：https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# 默认：所有变更需要 Owner review
+* @xsj
+
+# 后端代码 → 后端 Owner
+/backend/ @xsj-backend
+/backend/services/auth_service.py @xsj-security
+/backend/routers/auth.py @xsj-security
+/backend/services/quiz_service.py @xsj-ai
+/backend/services/rag_service.py @xsj-ai
+
+# 前端代码
+/frontend/ @xsj-frontend
+/frontend/hooks/useAuth.ts @xsj-security
+/frontend/lib/auth.ts @xsj-security
+
+# 数据流水线
+/scripts/00*.py @xsj-data
+/scripts/02_chunk_text.py @xsj-data
+/scripts/03_embed_and_upload.py @xsj-data
+/scripts/04_verify_pinecone.py @xsj-data
+/scripts/extract_vocab.py @xsj-data
+
+# 部署和运维
+/Dockerfile @xsj-ops
+/docker-compose.yml @xsj-ops
+/.github/workflows/ @xsj-ops
+/scripts/ops/ @xsj-ops
+
+# 文档
+/docs/AGENTS.md @xsj-lead
+/docs/CHANGELOG.md @xsj-lead
+/docs/OPS_PLAN.md @xsj-ops
+/docs/TEST_PLAN.md @xsj-qa
+/docs/PM_PLAN.md @xsj-pm

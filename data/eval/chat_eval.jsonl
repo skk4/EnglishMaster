@@ -1,0 +1,5 @@
+{"query":"什么是过去完成时？和过去时有什么区别？","mode":"grammar","language":"zh","expected_points":["时态定义","结构 had+V-ed","使用场景","至少 1 个例句"],"expected_unit":"Unit 8","expected_difficulty":"medium"}
+{"query":"讲讲 Unit 1 课文讲了什么","mode":"general","language":"zh","expected_points":["话题：兴趣爱好","主要人物","至少 1 句原文"],"expected_unit":"Unit 1","expected_difficulty":"easy"}
+{"query":"give me an example of past continuous tense","mode":"grammar","language":"en","expected_points":["英文例句","中文翻译","使用场景说明"],"expected_difficulty":"medium"}
+{"query":"完形填空怎么做？有什么技巧？","mode":"general","language":"zh","expected_points":["解题步骤","至少 2 条技巧"],"note":"非教材原文，测通用能力","expected_difficulty":"medium"}
+{"query":"帮我用英语介绍我的爱好是打篮球","mode":"conversation","language":"zh","expected_points":["英文翻译","语法点说明"],"expected_difficulty":"easy"}
