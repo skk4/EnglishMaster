@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, Header, HTTPException
 from pydantic import BaseModel
 
+from backend import metrics
 from backend.errors import AuthError, ErrorCode, NotFoundError, ValidationError
 from backend.services.auth_service import (
     authenticate,
@@ -24,7 +25,7 @@ class LoginRequest(BaseModel):
     password: str
 
 
-def get_current_user(authorization: str = Header(None)) -> dict:
+async def get_current_user(authorization: str = Header(None)) -> dict:
     """FastAPI dependency — extract user from Authorization: Bearer <token>."""
     if not authorization or not authorization.startswith("Bearer "):
         raise AuthError(ErrorCode.AUTH_MISSING_TOKEN, "未登录")
@@ -32,7 +33,9 @@ def get_current_user(authorization: str = Header(None)) -> dict:
     payload = decode_token(token)
     if not payload:
         raise AuthError(ErrorCode.AUTH_INVALID_TOKEN, "token 无效或已过期")
-    return {"id": int(payload["sub"]), "username": payload["username"]}
+    user = {"id": int(payload["sub"]), "username": payload["username"]}
+    metrics.set_current_user_id(str(user["id"]))
+    return user
 
 
 @router.post("/register")

@@ -3,6 +3,8 @@ Global singleton services — loaded once at startup, reused across all requests
 Never instantiate these inside a request handler (would cost 10-60s per request).
 """
 import logging
+from dataclasses import dataclass
+
 import torch
 from openai import OpenAI
 from sentence_transformers import SentenceTransformer
@@ -14,11 +16,21 @@ logger = logging.getLogger(__name__)
 settings = get_settings()
 
 _embedding_model: SentenceTransformer | None = None
-_minimax_client: OpenAI | None = None
+
+
+@dataclass
+class LLMClient:
+    """Holds an LLM client + metadata so services don't need to know the provider."""
+    client: OpenAI
+    provider: str      # "minimax" | "openai"
+    model: str         # "MiniMax-M3" | "gpt-4o-mini" | ...
+
+
+_llm_client: LLMClient | None = None
 
 
 async def startup_services():
-    global _embedding_model, _minimax_client
+    global _embedding_model, _llm_client
 
     device = "mps" if torch.backends.mps.is_available() else "cpu"
     print(f"[startup] Loading {settings.embedding_model} on {device.upper()}...")
@@ -35,18 +47,34 @@ async def startup_services():
         logger.error(f"[startup] Vector store init failed: {e}")
         raise
 
-    _minimax_client = OpenAI(
-        api_key=settings.minimax_api_key,
-        base_url=settings.minimax_base_url,
-    )
-    print(f"[startup] ✅ MiniMax client ready (model={settings.minimax_model})")
+    # 根据 LLM_PROVIDER 创建客户端
+    provider = settings.llm_provider
+    if provider == "openai":
+        _llm_client = LLMClient(
+            client=OpenAI(
+                api_key=settings.openai_api_key,
+                base_url=settings.openai_base_url,
+            ),
+            provider="openai",
+            model=settings.openai_model,
+        )
+    else:
+        _llm_client = LLMClient(
+            client=OpenAI(
+                api_key=settings.minimax_api_key,
+                base_url=settings.minimax_base_url,
+            ),
+            provider="minimax",
+            model=settings.minimax_model,
+        )
+    print(f"[startup] ✅ LLM client ready (provider={_llm_client.provider}, model={_llm_client.model})")
     print("[startup] All services initialized.")
 
 
 async def shutdown_services():
-    global _embedding_model, _minimax_client
+    global _embedding_model, _llm_client
     _embedding_model = None
-    _minimax_client = None
+    _llm_client = None
 
 
 def get_embedding_model() -> SentenceTransformer:
@@ -58,5 +86,6 @@ def get_vector_store_singleton():
     return get_vector_store()
 
 
-def get_chat_client() -> OpenAI:
-    return _minimax_client
+def get_llm_client() -> LLMClient:
+    """Return the current LLM client + metadata (provider, model)."""
+    return _llm_client

@@ -21,7 +21,7 @@ const MODES: { id: Mode; label: string; hint: string }[] = [
 ];
 
 export default function Home() {
-  const { messages, sessionId, sessionTitle, isLoading, error, send, clear, loadSession, startNew } = useChat();
+  const { messages, sessionId, sessionTitle, isLoading, error, send, loadSession, startNew } = useChat();
   const { user, loading } = useAuth();
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("general");
@@ -213,7 +213,7 @@ export default function Home() {
               <div className="text-center text-gray-400 mt-20">
                 <GraduationCap className="w-12 h-12 mx-auto mb-3 opacity-50" />
                 <p className="text-sm">开始你的英语学习之旅</p>
-                <p className="text-xs mt-1">试试问："Unit 1 的 Grammar Focus 讲什么？"</p>
+                <p className="text-xs mt-1">试试问：&ldquo;Unit 1 的 Grammar Focus 讲什么？&rdquo;</p>
               </div>
             )}
             {messages.map((m) => (

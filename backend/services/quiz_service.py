@@ -1,11 +1,11 @@
 import json
 import logging
 import re
+import time
 from typing import Optional
 
-from openai import OpenAI
-
-from backend.dependencies import get_chat_client
+from backend import metrics
+from backend.dependencies import get_llm_client
 from backend.prompts.quiz_prompt import GRADING_PROMPT, QUIZ_GENERATION_PROMPT
 from backend.services.rag_service import RAGService
 
@@ -94,7 +94,10 @@ def parse_json_response(content: str) -> dict | list:
 
 class QuizService:
     def __init__(self):
-        self.client: OpenAI = get_chat_client()
+        llm = get_llm_client()
+        self.client = llm.client
+        self.provider = llm.provider
+        self.model = llm.model
         self.rag = RAGService()
 
     def generate_quiz(
@@ -145,15 +148,36 @@ class QuizService:
                 "你是初中英语出题老师。严格按 JSON 数组输出，**不要写 <think> 推理过程**。"
                 "question 简短（< 50 字），explanation 简短（< 20 字）。"
             )
-        response = self.client.chat.completions.create(
-            model="MiniMax-M3",
-            max_tokens=max_tokens,
-            messages=[
-                {"role": "system", "content": system},
-                {"role": "user", "content": prompt},
-            ],
-            extra_body={"thinking": {"type": "disabled"}},
-        )
+        start = time.time()
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                max_tokens=max_tokens,
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": prompt},
+                ],
+                extra_body={"thinking": {"type": "disabled"}},
+            )
+            metrics.record_llm_call(
+                provider=self.provider,
+                model=self.model,
+                endpoint="quiz_generate",
+                input_tokens=response.usage.prompt_tokens,
+                output_tokens=response.usage.completion_tokens,
+                duration_s=time.time() - start,
+                status="success",
+            )
+        except Exception:
+            metrics.record_llm_call(
+                provider=self.provider,
+                model=self.model,
+                endpoint="quiz_generate",
+                duration_s=time.time() - start,
+                status="error",
+            )
+            raise
+
         result = parse_json_response(response.choices[0].message.content)
         if not isinstance(result, list):
             raise ValueError(f"Expected JSON array, got {type(result).__name__}")
@@ -197,9 +221,10 @@ class QuizService:
             student_answer=student_answer,
         )
 
+        start = time.time()
         try:
             response = self.client.chat.completions.create(
-                model="MiniMax-M3",
+                model=self.model,
                 max_tokens=600,
                 messages=[
                     {"role": "system", "content": "你是初中英语老师，严格按 JSON 格式批改。**重要**：中文内容中**不要使用双引号**，用「」或省略。"},
@@ -207,8 +232,19 @@ class QuizService:
                 ],
                 extra_body={"thinking": {"type": "disabled"}},
             )
+            # Record tokens immediately (API succeeded; parsing is an app concern)
+            metrics.record_llm_call(
+                provider=self.provider,
+                model=self.model,
+                endpoint="quiz_grade",
+                input_tokens=response.usage.prompt_tokens,
+                output_tokens=response.usage.completion_tokens,
+                duration_s=time.time() - start,
+                status="success",
+            )
             return parse_json_response(response.choices[0].message.content)
         except (ValueError, json.JSONDecodeError):
+            # LLM call succeeded but JSON was malformed — tokens already recorded.
             # Fallback: derive result from signal (correct answer vs student)
             correct = str(question.get("answer", "")).strip().upper()
             student = student_answer.strip().upper()

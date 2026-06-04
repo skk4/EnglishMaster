@@ -1,4 +1,5 @@
 """SQLAlchemy async models for SQLite (EnglishMaster Agent)."""
+import os
 from datetime import datetime, timezone
 
 from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, String, Text
@@ -122,5 +123,13 @@ class ChatMessage(Base):
 
 
 async def init_db():
+    # Ensure the directory for the database file exists (SQLite doesn't auto-create dirs)
+    # Parse the file path from the connection URL (e.g. sqlite+aiosqlite:///./database/app.db)
+    db_path = str(engine.url).split(":///", 1)[-1]
+    if db_path:
+        db_dir = os.path.dirname(db_path)
+        if db_dir and not os.path.isdir(db_dir):
+            os.makedirs(db_dir, exist_ok=True)
+
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)

@@ -1,0 +1,12 @@
+# Prometheus 配置 — 抓取 EnglishMaster 后端指标
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "englishmaster"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["host.docker.internal:8000"]
+        labels:
+          service: "englishmaster-backend"

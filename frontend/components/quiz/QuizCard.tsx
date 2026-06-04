@@ -50,7 +50,7 @@ export function QuizCard({ question, index, total, unit, semester, onSubmit, onN
 
       {question.type === "multiple_choice" && (
         <div className="space-y-2 mb-4">
-          {question.options.map((opt, i) => {
+          {(question.options || []).map((opt, i) => {
             const letter = opt.trim().charAt(0).toUpperCase();
             const isSelected = answer.toUpperCase() === letter;
             const isCorrectAnswer = question.answer.toUpperCase() === letter;

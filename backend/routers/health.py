@@ -23,9 +23,13 @@ _CACHE_TTL_SECONDS = 30  # 缓存 30s，避免每次请求都查依赖
 
 async def _check_dependencies() -> dict[str, Any]:
     """检查所有依赖健康。"""
+    from backend.config import get_settings
+    s = get_settings()
+    provider_key = s.llm_provider  # "minimax" | "openai"
+
     deps = {
         "pinecone": {"status": "unknown", "latency_ms": 0, "error": None},
-        "minimax": {"status": "unknown", "latency_ms": 0, "error": None},
+        provider_key: {"status": "unknown", "latency_ms": 0, "error": None},
         "sqlite": {"status": "unknown", "error": None},
     }
 
@@ -45,14 +49,14 @@ async def _check_dependencies() -> dict[str, Any]:
         deps["pinecone"]["status"] = "down"
         deps["pinecone"]["error"] = str(e)[:200]
 
-    # 2. MiniMax（仅在 chat 历史可用时不报错）
+    # 2. LLM provider（动态 key: "minimax" | "openai"）
     try:
-        from backend.dependencies import get_chat_client
-        client = get_chat_client()
-        deps["minimax"]["status"] = "up" if client is not None else "down"
+        from backend.dependencies import get_llm_client
+        llm = get_llm_client()
+        deps[provider_key]["status"] = "up" if llm is not None else "down"
     except Exception as e:
-        deps["minimax"]["status"] = "down"
-        deps["minimax"]["error"] = str(e)[:200]
+        deps[provider_key]["status"] = "down"
+        deps[provider_key]["error"] = str(e)[:200]
 
     # 3. SQLite（用主进程连接测试）
     try:
@@ -86,10 +90,14 @@ async def health_check(request: Request):
         cached = _health_cache["data"]
     else:
         deps = await _check_dependencies()
+        from backend.dependencies import get_llm_client
+        from backend.config import get_settings as _gs
+        llm = get_llm_client()
         cached = {
             "status": _overall_status(deps),
             "checks": deps,
-            "model": "MiniMax-M3",
+            "provider": _gs().llm_provider,
+            "model": llm.model if llm else "unknown",
         }
         _health_cache["data"] = cached
         _health_cache["last_check"] = now

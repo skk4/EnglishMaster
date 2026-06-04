@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
+from backend import metrics
 from backend.routers.auth import get_current_user
 from backend.services.quiz_service import QuizService
 from backend.services.progress_service import save_quiz_record
@@ -26,6 +27,7 @@ class GradeRequest(BaseModel):
 @router.post("/generate")
 async def generate_quiz(request: GenerateRequest):
     """Generate quiz questions based on textbook content."""
+    metrics.set_current_user_id("anonymous")
     if request.count > 20:
         raise HTTPException(status_code=400, detail="count must be <= 20")
     if request.quiz_type not in ("multiple_choice", "fill_blank", "translation"):

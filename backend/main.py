@@ -2,7 +2,8 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
+from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
 
 from backend.config import get_settings
 from backend.dependencies import shutdown_services, startup_services
@@ -59,4 +60,14 @@ app.include_router(quiz.router, prefix="/api/quiz", tags=["Quiz"])
 app.include_router(progress.router, prefix="/api/progress", tags=["Progress"])
 app.include_router(vocabulary.router, prefix="/api/vocab", tags=["Vocabulary"])
 app.include_router(health.router, prefix="/api/health", tags=["Health"])
+
+# Prometheus metrics endpoint
+@app.get("/metrics")
+async def metrics_endpoint():
+    from backend.system_metrics import collect as collect_system
+    collect_system()
+    return Response(
+        content=generate_latest(),
+        media_type=CONTENT_TYPE_LATEST,
+    )
 

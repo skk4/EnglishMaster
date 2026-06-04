@@ -3,10 +3,19 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
+    # LLM Provider 选择
+    llm_provider: str = "minimax"  # minimax | openai
+
     # MiniMax API (OpenAI-compatible)
     minimax_api_key: str = ""
     minimax_model: str = "MiniMax-M3"
     minimax_base_url: str = "https://api.minimax.io/v1"
+
+    # OpenAI API
+    openai_api_key: str = ""
+    openai_model: str = "gpt-4o-mini"
+    openai_base_url: str = "https://api.openai.com/v1"
+
     max_tokens: int = 2048
 
     # Pinecone

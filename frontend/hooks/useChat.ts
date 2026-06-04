@@ -4,6 +4,15 @@ import { useCallback, useRef, useState } from "react";
 import { chatStream, getSession, ChatSessionDetail } from "@/lib/api";
 import { Message, Source } from "@/lib/types";
 
+function parseSources(raw: string): Source[] {
+  if (!raw) return [];
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
+}
+
 export function useChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [sessionId, setSessionId] = useState<number | null>(null);
@@ -25,9 +34,9 @@ export function useChat() {
       setMessages(
         data.messages.map((m) => ({
           id: `hist_${m.id}`,
-          role: m.role,
+          role: m.role as "user" | "assistant",
           content: m.content,
-          sources: m.sources,
+          sources: parseSources(m.sources_json),
         }))
       );
     } catch (e) {
