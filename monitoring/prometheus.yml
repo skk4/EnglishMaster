@@ -1,4 +1,4 @@
-# Prometheus 配置 — 抓取 EnglishMaster 后端指标
+# Prometheus 配置 — 抓取 EnglishMaster 后端 + 腾讯云系统指标
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -10,3 +10,11 @@ scrape_configs:
       - targets: ["host.docker.internal:8000"]
         labels:
           service: "englishmaster-backend"
+
+  - job_name: "tencent-cloud"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["49.51.74.120:9100"]
+        labels:
+          service: "tencent-cloud"
+          host: "tx-8grade"

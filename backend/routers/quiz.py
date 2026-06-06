@@ -25,9 +25,8 @@ class GradeRequest(BaseModel):
 
 
 @router.post("/generate")
-async def generate_quiz(request: GenerateRequest):
+async def generate_quiz(request: GenerateRequest, user: dict = Depends(get_current_user)):
     """Generate quiz questions based on textbook content."""
-    metrics.set_current_user_id("anonymous")
     if request.count > 20:
         raise HTTPException(status_code=400, detail="count must be <= 20")
     if request.quiz_type not in ("multiple_choice", "fill_blank", "translation"):

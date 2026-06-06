@@ -136,18 +136,24 @@ def _collect_memory() -> None:
 
 
 def _collect_disk() -> None:
+    # macOS 排除 APFS 系统卷（/System/Volumes/*），只保留主盘
+    # 注意 macOS 根分区是 ro（SIP 保护），不能用 rw 作为条件
+    SKIP_PREFIXES = ("/System/Volumes/", "/private/", "/dev/")
     for part in psutil.disk_partitions():
-        if "rw" not in part.opts and "read" not in part.opts.split(",")[0]:
+        if part.mountpoint.startswith(SKIP_PREFIXES):
             continue
         try:
             usage = psutil.disk_usage(part.mountpoint)
         except (PermissionError, OSError):
             continue
         mp = part.mountpoint
-        disk_bytes.labels(mountpoint=mp, type="total").set(usage.total)
-        disk_bytes.labels(mountpoint=mp, type="used").set(usage.used)
-        disk_bytes.labels(mountpoint=mp, type="free").set(usage.free)
-        disk_percent.labels(mountpoint=mp).set(usage.percent)
+        label = "/" if mp == "/" else mp.split("/")[-1] or mp
+        if usage.total == 0:          # 虚拟文件系统
+            continue
+        disk_bytes.labels(mountpoint=label, type="total").set(usage.total)
+        disk_bytes.labels(mountpoint=label, type="used").set(usage.used)
+        disk_bytes.labels(mountpoint=label, type="free").set(usage.free)
+        disk_percent.labels(mountpoint=label).set(usage.percent)
 
 
 def _collect_network() -> None:

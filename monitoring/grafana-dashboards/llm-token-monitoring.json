@@ -346,11 +346,111 @@
       ],
       "title": "⚡ 系统负载",
       "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "drawStyle": "line", "fillOpacity": 5, "lineWidth": 1, "pointSize": 2, "showPoints": "never", "spanNulls": false, "stacking": { "group": "A", "mode": "none" } },
+          "mappings": [],
+          "unit": "percent"
+        }
+      },
+      "gridPos": { "h": 7, "w": 12, "x": 0, "y": 49 },
+      "id": 20,
+      "options": { "legend": { "displayMode": "list", "placement": "right" }, "tooltip": { "mode": "multi", "sort": "desc" } },
+      "targets": [
+        { "expr": "100 - (avg by (cpu) (rate(node_cpu_seconds_total{instance=~\"49.51.74.120:9100\",mode=\"idle\"}[5m])) * 100)", "legendFormat": "CPU {{cpu}}", "refId": "A" }
+      ],
+      "title": "☁️ 腾讯云 CPU",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "drawStyle": "line", "fillOpacity": 5, "lineWidth": 1, "pointSize": 2, "showPoints": "never", "spanNulls": false, "stacking": { "group": "A", "mode": "normal" } },
+          "mappings": [],
+          "unit": "bytes"
+        }
+      },
+      "gridPos": { "h": 7, "w": 12, "x": 12, "y": 49 },
+      "id": 21,
+      "options": { "legend": { "displayMode": "list", "placement": "right" }, "tooltip": { "mode": "multi", "sort": "desc" } },
+      "targets": [
+        { "expr": "node_memory_MemTotal_bytes{instance=~\"49.51.74.120:9100\"} - node_memory_MemAvailable_bytes{instance=~\"49.51.74.120:9100\"}", "legendFormat": "Used", "refId": "A" },
+        { "expr": "node_memory_MemAvailable_bytes{instance=~\"49.51.74.120:9100\"}", "legendFormat": "Available", "refId": "B" },
+        { "expr": "node_memory_MemTotal_bytes{instance=~\"49.51.74.120:9100\"}", "legendFormat": "Total", "refId": "C" }
+      ],
+      "title": "☁️ 腾讯云 内存",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "orange", "value": 70 }, { "color": "red", "value": 90 }] },
+          "unit": "percent"
+        }
+      },
+      "gridPos": { "h": 6, "w": 8, "x": 0, "y": 56 },
+      "id": 22,
+      "options": { "orientation": "horizontal", "reduceOptions": { "calcs": ["lastNotNull"], "values": false }, "showThresholdLabels": false, "showThresholdMarkers": true },
+      "targets": [
+        { "expr": "100 - (node_filesystem_avail_bytes{instance=~\"49.51.74.120:9100\",mountpoint=\"/\"} / node_filesystem_size_bytes{instance=~\"49.51.74.120:9100\",mountpoint=\"/\"} * 100)", "legendFormat": "/", "refId": "A" }
+      ],
+      "title": "☁️ 腾讯云 磁盘 /",
+      "type": "gauge"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "drawStyle": "line", "fillOpacity": 5, "lineWidth": 1, "pointSize": 2, "showPoints": "never", "spanNulls": false, "stacking": { "group": "A", "mode": "none" } },
+          "mappings": [],
+          "unit": "Bps"
+        }
+      },
+      "gridPos": { "h": 6, "w": 8, "x": 8, "y": 56 },
+      "id": 23,
+      "options": { "legend": { "displayMode": "list", "placement": "right" }, "tooltip": { "mode": "multi", "sort": "desc" } },
+      "targets": [
+        { "expr": "rate(node_network_receive_bytes_total{instance=~\"49.51.74.120:9100\",device=\"eth0\"}[5m])", "legendFormat": "↓ Download", "refId": "A" },
+        { "expr": "rate(node_network_transmit_bytes_total{instance=~\"49.51.74.120:9100\",device=\"eth0\"}[5m])", "legendFormat": "↑ Upload", "refId": "B" }
+      ],
+      "title": "☁️ 腾讯云 网络",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 6, "w": 8, "x": 16, "y": 56 },
+      "id": 24,
+      "options": { "colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": { "calcs": ["lastNotNull"], "values": false }, "textMode": "auto" },
+      "targets": [
+        { "expr": "node_load1{instance=~\"49.51.74.120:9100\"}", "legendFormat": "1m", "refId": "A" },
+        { "expr": "node_load5{instance=~\"49.51.74.120:9100\"}", "legendFormat": "5m", "refId": "B" },
+        { "expr": "node_load15{instance=~\"49.51.74.120:9100\"}", "legendFormat": "15m", "refId": "C" }
+      ],
+      "title": "☁️ 腾讯云 负载",
+      "type": "stat"
     }
   ],
   "refresh": "10s",
   "schemaVersion": 38,
-  "tags": ["englishmaster", "llm", "system"],
+  "tags": ["englishmaster", "llm", "system", "tencent"],
   "templating": { "list": [] },
   "time": { "from": "now-1h", "to": "now" },
   "timepicker": {},
