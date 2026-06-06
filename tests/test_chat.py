@@ -20,7 +20,6 @@ def make_minimax_mock(content: str, sources: list = None) -> MagicMock:
 
 
 @pytest.mark.asyncio
-@pytest.mark.xfail(reason="需要 embedding model 加载（startup_services 被测试 bypass）")
 async def test_chat_sync_strips_think_block(async_client, alice_user, mock_minimax):
     """M3 输出含 <think> 块，content 必须不含 think"""
     mock_minimax.chat.completions.create.return_value = make_minimax_mock(
@@ -39,7 +38,6 @@ async def test_chat_sync_strips_think_block(async_client, alice_user, mock_minim
 
 
 @pytest.mark.asyncio
-@pytest.mark.xfail(reason="需要 embedding model 加载")
 async def test_chat_sync_saves_to_history(async_client, alice_user, mock_minimax):
     """sync 应同时保存 user 和 assistant 两条消息到 chat_messages"""
     mock_minimax.chat.completions.create.return_value = make_minimax_mock("OK answer")
@@ -76,7 +74,6 @@ async def test_chat_sync_saves_to_history(async_client, alice_user, mock_minimax
 
 
 @pytest.mark.asyncio
-@pytest.mark.xfail(reason="需要 embedding model 加载")
 async def test_chat_sync_message_saved_with_mode(async_client, alice_user, mock_minimax):
     """mode 字段应正确保存"""
     mock_minimax.chat.completions.create.return_value = make_minimax_mock("answer")

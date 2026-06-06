@@ -91,6 +91,27 @@ def main():
                 top = results.matches[0]
                 print(f"       (best score was {top.score:.3f})")
 
+    # --- Metadata audit ---
+    print(f"\n[Metadata audit]")
+    VALID_UNITS = {f"Unit {i}" for i in range(1, 11)}
+    bad_units = 0
+    total_fetched = 0
+    # 采样 100 个向量检查 metadata
+    sample_ids = []
+    for page in index.list(prefix=""):
+        sample_ids.extend(item.id for item in page)
+        if len(sample_ids) >= 100:
+            break
+    fetched = index.fetch(ids=sample_ids[:100])
+    for vid, v in fetched.vectors.items():
+        total_fetched += 1
+        u = str(v.metadata.get("unit", "?"))
+        if u not in VALID_UNITS:
+            bad_units += 1
+            print(f"    ❌ {vid}: unit={u} (bad)")
+    meta_ok = bad_units == 0
+    print(f"    {'✅' if meta_ok else '❌'} {total_fetched - bad_units}/{total_fetched} clean, {bad_units} bad")
+
     # --- Summary ---
     print(f"\n{'='*55}")
     all_ok = vec_ok and passed == len(TEST_QUERIES)

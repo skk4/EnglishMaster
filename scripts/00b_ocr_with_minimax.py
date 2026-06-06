@@ -104,10 +104,11 @@ def ocr_single_page(client: OpenAI, image_path: str) -> str:
 def detect_unit(text: str, current_unit: str) -> str:
     cn_map = {"一": "1", "二": "2", "三": "3", "四": "4", "五": "5",
               "六": "6", "七": "7", "八": "8", "九": "9", "十": "10"}
-    for pattern in [r"\[UNIT\s+(\d+)\]", r"Unit\s+(\d+)", r"UNIT\s+(\d+)"]:
+    for pattern in [r"\[UNIT\s+(\d+)\]", r"Unit\s+(10|[1-9])\b", r"UNIT\s+(10|[1-9])\b"]:
         m = re.search(pattern, text, re.IGNORECASE)
         if m:
-            return f"Unit {cn_map.get(m.group(1), m.group(1))}"
+            matched = m.group(1)
+            return f"Unit {cn_map.get(matched, matched)}"
     return current_unit
 
 

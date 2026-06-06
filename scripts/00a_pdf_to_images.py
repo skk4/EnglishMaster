@@ -50,7 +50,7 @@ def extract_native_pdf(pdf_path: str, semester: int) -> list[dict]:
         if len(text) < 30:
             continue
 
-        unit_match = re.search(r'Unit\s+(\d+)', text, re.IGNORECASE)
+        unit_match = re.search(r'Unit\s+(10|[1-9])\b', text, re.IGNORECASE)
         if unit_match:
             current_unit = f"Unit {unit_match.group(1)}"
 

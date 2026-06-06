@@ -99,6 +99,25 @@ def process_semester(semester: int, force: bool = False) -> int:
     with open(input_path, encoding="utf-8") as f:
         pages = json.load(f)
 
+    # 用人工映射表覆盖 OCR + regex 猜出来的 unit（消除 10.1% 的附录页污染）
+    import sys
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+    from data.page_mapping import get_unit
+
+    clean_pages = []
+    skipped = 0
+    for p in pages:
+        cat, label = get_unit(p.get("semester", 1), p.get("page_num", 1))
+        if cat == "skip":
+            skipped += 1
+            continue
+        p["unit"] = label         # 覆盖上游猜的 unit
+        p["category"] = cat       # 供下游过滤
+        clean_pages.append(p)
+    if skipped:
+        print(f"  Skipped {skipped} pages (cover/toc/blank)")
+    pages = clean_pages
+
     chunks = chunk_pages(pages)
 
     Path("data/processed").mkdir(parents=True, exist_ok=True)

@@ -99,46 +99,97 @@ async def temp_db(monkeypatch) -> AsyncGenerator[str, None]:
 
 @pytest.fixture
 def mock_minimax(request):
-    """Mock MiniMax 客户端（同步 fixture，避免 async generator 问题）。
+    """Mock LLM 客户端（同步 fixture，避免 async generator 问题）。
     重要：agent_service/quiz_service 调用的是同步 OpenAI SDK，
     所以 chat.completions.create 必须是普通 MagicMock（不是 AsyncMock）。
     另：from X import Y 会复制引用，需 patch 每个消费模块。
+
+    重构：get_chat_client → get_llm_client，返回 LLMClient(client, provider, model)
     """
-    mock = MagicMock()
-    mock.chat.completions.create = MagicMock()
+    # 模拟 OpenAI 客户端
+    fake_openai_client = MagicMock()
+    fake_openai_client.chat.completions.create = MagicMock()
+
+    # 模拟 LLMClient dataclass
+    from backend.dependencies import LLMClient
+    fake_llm = LLMClient(
+        client=fake_openai_client,
+        provider="minimax",
+        model="MiniMax-M3",
+    )
+
     modules_to_patch = [
-        "backend.dependencies.get_chat_client",
-        "backend.services.agent_service.get_chat_client",
-        "backend.services.quiz_service.get_chat_client",
+        "backend.dependencies.get_llm_client",
+        "backend.services.agent_service.get_llm_client",
+        "backend.services.quiz_service.get_llm_client",
     ]
-    patchers = [patch(m, return_value=mock) for m in modules_to_patch]
+    patchers = [patch(m, return_value=fake_llm) for m in modules_to_patch]
     for p in patchers:
         p.start()
     request.addfinalizer(lambda: [p.stop() for p in patchers])
-    return mock
+    return fake_openai_client  # 返回 OpenAI 客户端本身，便于测试设置 response
 
 
 @pytest_asyncio.fixture
 async def mock_pinecone() -> AsyncGenerator[MagicMock, None]:
-    """Mock Pinecone index。"""
+    """Mock Pinecone index（健康检查依赖 vector store）。"""
     mock = MagicMock()
     mock.describe_index_stats.return_value = MagicMock(
         total_vector_count=841, dimension=1024
     )
     # 模拟 query 返回空 matches
     mock.query.return_value = MagicMock(matches=[])
-    with patch("backend.dependencies.get_pinecone_index", return_value=mock):
+
+    # 新版本用 get_vector_store_singleton 而非 get_pinecone_index
+    from backend.services import vector_store as vs_mod
+    fake_store = MagicMock()
+    fake_store.describe_stats.return_value = {
+        "total_vector_count": 841,
+        "dimension": 1024,
+    }
+    with patch.object(vs_mod, "get_vector_store", return_value=fake_store):
         yield mock
+
+
+@pytest.fixture
+def mock_embedding():
+    """Mock embedding model，避免加载 3GB+ 的真实 SentenceTransformer。
+
+    patch 两个点（因为 `from X import Y` 会复制引用）：
+    - backend.dependencies.get_embedding_model  (AgentService 等用)
+    - backend.services.rag_service.get_embedding_model  (RAGService 用)
+    """
+    from backend import dependencies as deps_mod
+    from backend.services import rag_service as rag_mod
+
+    fake = MagicMock()
+    # encode() 返回 mock numpy 数组，.tolist() 返回 1024 维 0 向量
+    # 真实 sentence-transformers.encode() 返回的是 numpy.ndarray，所以 .tolist() 是方法
+    fake_array = MagicMock()
+    fake_array.tolist.return_value = [0.0] * 1024
+    fake.encode.return_value = fake_array
+
+    patchers = [
+        patch.object(deps_mod, "get_embedding_model", return_value=fake),
+        patch.object(rag_mod, "get_embedding_model", return_value=fake),
+    ]
+    for p in patchers:
+        p.start()
+    try:
+        yield fake
+    finally:
+        for p in patchers:
+            p.stop()
 
 
 # ==================== HTTP Client ====================
 
 @pytest_asyncio.fixture
-async def async_client(temp_db, mock_minimax, mock_pinecone) -> AsyncGenerator[AsyncClient, None]:
+async def async_client(temp_db, mock_minimax, mock_pinecone, mock_embedding) -> AsyncGenerator[AsyncClient, None]:
     """
     完整配置好的 httpx 异步客户端。
     - 用 ASGITransport，无需起真服务器
-    - 临时 DB + M3/Pinecone mock
+    - 临时 DB + M3/Pinecone/Embedding mock（绕过 startup_services）
     """
     # 关键：不通过 main.py 的 lifespan（那会冻结 DATABASE_URL 到首次启动）。
     # 我们直接建表 + 重新构造 app，绕过 lifespan。

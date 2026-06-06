@@ -33,18 +33,21 @@ async def _check_dependencies() -> dict[str, Any]:
         "sqlite": {"status": "unknown", "error": None},
     }
 
-    # 1. Pinecone
+    # 1. Vector store (Pinecone / FAISS / Qdrant / ...，由 VECTOR_STORE_TYPE 决定)
     try:
-        from backend.dependencies import get_pinecone_index
-        idx = get_pinecone_index()
-        if idx is None:
+        from backend.dependencies import get_vector_store_singleton
+        store = get_vector_store_singleton()
+        if store is None:
             deps["pinecone"]["status"] = "down"
-            deps["pinecone"]["error"] = "Pinecone not initialized"
+            deps["pinecone"]["error"] = "Vector store not initialized"
         else:
             t0 = time.time()
-            stats = await asyncio.to_thread(idx.describe_index_stats)
+            stats = await asyncio.to_thread(store.describe_stats)
             deps["pinecone"]["latency_ms"] = int((time.time() - t0) * 1000)
-            deps["pinecone"]["status"] = "up" if stats.total_vector_count > 0 else "empty"
+            # 兼容两种 stats 返回格式（dict / 对象）
+            total = (stats.get("total_vector_count", 0) if isinstance(stats, dict)
+                     else getattr(stats, "total_vector_count", 0))
+            deps["pinecone"]["status"] = "up" if total > 0 else "empty"
     except Exception as e:
         deps["pinecone"]["status"] = "down"
         deps["pinecone"]["error"] = str(e)[:200]

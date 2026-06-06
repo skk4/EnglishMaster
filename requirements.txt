@@ -54,3 +54,7 @@ psutil==7.2.1
 
 # ===== 配置 =====
 python-dotenv==1.2.2
+
+## 测试依赖
+pytest>=7.4
+pytest-asyncio>=0.21

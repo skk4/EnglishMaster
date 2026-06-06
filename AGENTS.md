@@ -2,7 +2,7 @@
 
 > **适用范围**：所有基于 Claude API + RAG 架构的 Agent 项目（学习助手、客服 Agent、知识库问答等）  
 > **运行环境**：macOS 13 Ventura / Apple M1 / 16GB RAM / Python 3.11  
-> **经验来源**：初中英语 AI 学习 Agent 完整开发过程提炼  
+> **经验来源**：初中英语 AI 学习 Agent 完整开发过程提炼（含 MiniMax M3 + Claude 多 AI 协作经验）  
 > **维护原则**：每次踩坑后更新本文档，Claude Code 开发前必读
 
 ---
@@ -638,6 +638,7 @@ Claude Code 生成代码后，检查以下内容再运行：
 
 ```markdown
 ## 变更日志
+- v1.5：新增坑位 27（多 AI 协作时代码接口错位）；补 pytest 自测发现 `get_pinecone_index` 死引用、`mock_minimax` patch 旧函数名
 - v1.4：新增坑位 19-26（M3 `<think>` 块、JWT `sub` claim、React Hooks 顺序、SQLite greenlet 依赖、quiz 截断修复 4 步组合、grade 中文双引号破坏 JSON、前端 GET 漏带 Authorization 头、AI 流式输出 think 块泄露）；§7.5 RAG top_k 选择决策记录
 - v1.3：OCR 从 PaddleOCR 切换为 EasyOCR（修复 macOS Ventura M1 卡死 bug）
 - v1.2：同步实际 Pinecone 配置（xsjkndb01，1024维，multilingual-e5-large）
@@ -773,6 +774,7 @@ npm install --registry https://registry.npmmirror.com
 | 24 | **M3 中文反馈里用 ASCII 双引号破坏 JSON 字符串** | M3 | `grade_answer` 返回 500 | ①prompt 明确禁止中文里用双引号（用「」）；②`parse_json_response` 替换全角引号；③grade 端点加 try/except fallback，LLM 失败时用答案匹配给默认结果 |
 | 25 | **前端 GET 接口漏带 Authorization 头** | 所有 | 受保护接口返回 401，前端 catch 后页面崩溃 | `lib/api.ts` 的所有 `fetch` 都要用 `authHeaders()` 包装，连"可选登录"的接口也建议带（无害） |
 | 26 | **AI 流式输出 <think> 推理块泄露给用户** | M3 | 用户聊天时看到 `<reasoning>...</reasoning>` | 三道防线：①prompt 禁止；②后端 `agent_service` 流式状态机过滤；③前端 `useChat` 再次过滤 |
+| 27 | **多 AI 协作时代码接口错位（两段流水线坑）** | 所有 | 跑 `pytest` 才发现 `get_pinecone_index` 等函数从未存在；重构 `dependencies.py` 后 `conftest.py` 没跟上 patch 旧函数名 | ①每段开发流水线**必须独立可跑测试**；②重构后强制 `pytest tests/` 验证；③M3 等大模型写代码时假设的函数必须真实存在，否则在 prompt 里要求 "先 grep 确认依赖" |
 
 ---
 
@@ -934,5 +936,5 @@ print(idx.describe_index_stats())
 
 
 
-*文档版本：v1.0 | 创建：2026-06-01*  
+*文档版本：v1.5 | 创建：2026-06-01 | 最近更新：2026-06-03*  
 *维护规则：每次踩新坑后更新第 13 节「已知坑位速查表」，并在变更日志中记录*
