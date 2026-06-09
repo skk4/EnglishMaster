@@ -40,7 +40,7 @@ app.add_middleware(RateLimitMiddleware)
 # 3. CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.frontend_url, "http://localhost:3000"],
+    allow_origins=[settings.frontend_url, *[f"http://localhost:{p}" for p in range(3000, 3010)]],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

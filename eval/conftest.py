@@ -17,11 +17,15 @@ eval/conftest.py — 真实集成测试 fixture
 
     解决：eval 自己的 httpx 客户端显式 trust_env=False。
     不影响后端进程：uvicorn 启动时已读到代理，照常走代理查 Pinecone。
+
+    端口：BACKEND_URL 环境变量控制，默认 localhost:8000。
+         BACKEND_URL=http://localhost:8001 pytest eval/
 """
+import os
 import pytest
 import httpx
 
-BASE_URL = "http://localhost:8000"
+BASE_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
 EVAL_USER = {
     "username": "eval_user_001",
     "password": "evaltest123",

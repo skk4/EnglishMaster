@@ -11,10 +11,11 @@ eval/run_eval.py — 一键跑所有上线前评测，输出报告
 """
 import sys
 import subprocess
+import os
 import argparse
 from datetime import datetime
 
-BASE_URL = "http://localhost:8000"
+BASE_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
 
 
 def check_server():
