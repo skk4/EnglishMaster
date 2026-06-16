@@ -26,7 +26,7 @@ pinecone==9.0.1
 # 嵌入模型
 sentence-transformers==5.5.1
 # 底层依赖
-torch==2.11.0
+torch==2.12.0
 tokenizers==0.22.2
 transformers==5.9.0
 safetensors==0.7.0
