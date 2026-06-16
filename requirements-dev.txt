@@ -8,4 +8,4 @@ pytest-cov==7.1.0
 
 # 代码质量
 ruff==0.6.0    # 快，替代 flake8 + black + isort
-mypy==1.10.0   # 静态类型检查
+mypy==2.1.0   # 静态类型检查
