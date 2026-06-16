@@ -5,7 +5,7 @@
 # ===== Web 框架 =====
 fastapi==0.115.0
 uvicorn[standard]==0.30.6
-python-multipart==0.0.12
+python-multipart==0.0.32
 
 # ===== 数据验证 =====
 pydantic==2.13.4
