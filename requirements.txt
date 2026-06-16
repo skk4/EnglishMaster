@@ -12,7 +12,7 @@ pydantic==2.13.4
 pydantic-settings==2.6.1
 
 # ===== HTTP 客户端 =====
-httpx==0.27.2
+httpx==0.28.1
 
 # ===== AI 集成 =====
 # 对话/出题/批改用 OpenAI 兼容接口（MiniMax M3）
